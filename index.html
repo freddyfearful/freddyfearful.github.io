@@ -28,9 +28,10 @@
     const button = document.querySelector("button");
     const output = document.querySelector("#output");
     const textarea = document.querySelector("textarea");
-    const wsUri = "ws://127.0.0.1/";
-    const websocket = new WebSocket(wsUri);
+    var wsUri = "ws://127.0.0.1/";
+    var websocket;
 
+      writeToScreen("enter ip address");
     button.addEventListener("click", onClickButton);
 
     websocket.onopen = (e) => {
@@ -60,11 +61,18 @@
     }
 
     function onClickButton() {
-      const text = textarea.value;
+      if (wsUri === "ws://127.0.0.1/") {
+        wsUri = `ws://${textarea.value}/`
+        websocket = new WebSocket(wsUri);
+        textarea.value = "";
+        writeToScreen("enter messages");
+      } else {
+        const text = textarea.value; 
 
-      text && doSend(text);
-      textarea.value = "";
-      textarea.focus();
+        text && doSend(text);
+        textarea.value = "";
+        textarea.focus();
+      }
     }
   </script>
 </html>
