@@ -61,7 +61,7 @@
     }
 
     function onClickButton() {
-      if (wsUri === "ws://127.0.0.1/") {
+      if (wsUri == "ws://127.0.0.1/") {
         wsUri = `ws://${textarea.value}/`
         websocket = new WebSocket(wsUri);
         textarea.value = "";
